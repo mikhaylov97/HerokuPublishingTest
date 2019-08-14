@@ -23,6 +23,7 @@ public class CommonController {
         return "index";
     }
 
+    //test
     @PostMapping("/user/create")
     public String createNewUser(@RequestParam(name = "user-name") String userName,
                                 @RequestParam(name = "user-last-name") String userLastName) {
