@@ -23,11 +23,16 @@ public class CommonController {
         return "index";
     }
 
-    //test
     @PostMapping("/user/create")
     public String createNewUser(@RequestParam(name = "user-name") String userName,
                                 @RequestParam(name = "user-last-name") String userLastName) {
         userService.saveUser(new User(userName, userLastName));
         return "redirect:/";
+    }
+
+    @GetMapping("/home")
+    public String getHomePage(Model model) {
+        model.addAttribute("users", userService.findAllUsers());
+        return "index";
     }
 }
