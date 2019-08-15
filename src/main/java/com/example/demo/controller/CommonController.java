@@ -35,4 +35,10 @@ public class CommonController {
         model.addAttribute("users", userService.findAllUsers());
         return "index";
     }
+
+    @GetMapping("/home-2")
+    public String getHomeSecondPage(Model model) {
+        model.addAttribute("users", userService.findAllUsers());
+        return "index";
+    }
 }
