@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.User;
+import com.example.demo.service.api.MailSenderService;
 import com.example.demo.service.api.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CommonController {
 
     private final UserService userService;
+    private final MailSenderService mailSenderService;
 
-    public CommonController(UserService userService) {
+    public CommonController(UserService userService, MailSenderService mailSenderService) {
         this.userService = userService;
+        this.mailSenderService = mailSenderService;
     }
 
     @GetMapping("/")
@@ -40,5 +43,11 @@ public class CommonController {
     public String getHomeSecondPage(Model model) {
         model.addAttribute("users", userService.findAllUsers());
         return "index";
+    }
+
+    @PostMapping("/message/send")
+    public String sendEmailMessage() {
+        mailSenderService.sendEmail();
+        return "redirect:/";
     }
 }
